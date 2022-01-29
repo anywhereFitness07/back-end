@@ -13,9 +13,20 @@ exports.up = async (knex) => {
         tbl.string('role').notNullable()
         tbl.string('password').notNullable()
     })
+      .createTable('classes', tbl => {
+          tbl.increments('class_id')
+          tbl.string('class_name').notNullable()
+          tbl.string('start_time').notNullable()
+          tbl.integer('duration').notNullable()
+          tbl.integer('intensity_level').notNullable()
+          tbl.string('location').notNullable()
+          tbl.integer('current_clients').notNullable()
+          tbl.integer('max_class_size').notNullable()
+      })
 }
 
 exports.down = async (knex) => {
+  await knex.schema.dropTableIfExists('classes')
   await knex.schema.dropTableIfExists('instructors')
   await knex.schema.dropTableIfExists('clients')
 }
