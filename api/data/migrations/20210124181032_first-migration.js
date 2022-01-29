@@ -12,7 +12,6 @@ exports.up = async (knex) => {
         tbl.string('instructor_name').notNullable()
         tbl.string('role').notNullable()
         tbl.string('password').notNullable()
-
     })
 }
 
