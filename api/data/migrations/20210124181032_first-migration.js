@@ -7,6 +7,13 @@ exports.up = async (knex) => {
       users.string('role', 200).notNullable()
       users.timestamps(false, true)
     })
+    .createTable('instructors', tbl => {
+        tbl.increments('instructor_id')
+        tbl.string('instructor_name').notNullable()
+        tbl.string('role').notNullable()
+        tbl.string('password').notNullable()
+
+    })
 }
 
 exports.down = async (knex) => {
