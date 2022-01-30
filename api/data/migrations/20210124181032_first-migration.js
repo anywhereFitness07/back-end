@@ -32,9 +32,27 @@ exports.up = async (knex) => {
               .onUpdate('CASCADE')
               .onDelete('CASCADE')
       })
+      .createTable('client-reservations', tbl => {
+          tbl.increments('cr_id')
+          tbl.integer('class_id')
+              .unsigned()
+              .notNullable()
+              .references('class_id')
+              .inTable('classes')
+              .onUpdate("CASCADE")
+              .onDelete("CASCADE")
+          tbl.integer('client_id')
+              .unsigned()
+              .notNullable()
+              .references('client_id')
+              .inTable('clients')
+              .onUpdate("CASCADE")
+              .onDelete("CASCADE")
+      })
 }
 
 exports.down = async (knex) => {
+  await knex.schema.dropTableIfExists('client-reservations')
   await knex.schema.dropTableIfExists('classes')
   await knex.schema.dropTableIfExists('instructors')
   await knex.schema.dropTableIfExists('clients')
