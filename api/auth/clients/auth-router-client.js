@@ -1,9 +1,8 @@
 const router = require('express').Router();
 const Clients = require('./auth-model-client');
 const bcrypt = require('bcryptjs');
-const { checkClientLogin } = require('./auth-middleware');
-const { clientMakeToken } = require('./makeToken');
-const db = require('../data/db-config');
+const { checkClientLogin } = require('./auth-middleware-client');
+const { clientMakeToken } = require('../make-token/clientMakeToken');
 
 
 router.get('/', (req, res, next) => {

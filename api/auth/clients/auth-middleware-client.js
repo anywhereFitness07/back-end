@@ -1,4 +1,4 @@
-const db = require('../data/db-config');
+const db = require('../../data/db-config');
 
 
 const checkClientLogin = async (req, res, next) => {
@@ -21,29 +21,13 @@ const checkClientLogin = async (req, res, next) => {
     }
 };
 
-const checkInstLogin = async (req, res, next) => {
-    const instructor_name = req.body;
 
-    try {
-        const instructor = await db('clients').where({instructor_name}).first();
-        if(instructor) {
-            req.client = instructor;
-            next();
-        } else {
-            next({status: 404, message: `Invalid Credentials`})
-        }
-    }
-    catch (err) {
-        next(err)
-    }
-};
 
 
 
 
 module.exports = {
     checkClientLogin,
-    checkInstLogin,
 };
 
 

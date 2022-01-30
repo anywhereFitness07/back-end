@@ -1,7 +1,9 @@
 const router = require('express').Router();
 const bcrypt = require('bcryptjs');
-const makeToken = require('./makeToken');
-const Instructors = require('./auth-model-instructor')
+const Instructors = require('./auth-model-instructor');
+const { checkInstLogin } = require('./auth-middleware-instructor');
+const  instructorMakeToken = require('../make-token/instructorMakeToken');
+
 
 
 router.get('/', (req, res, next) => {
@@ -24,6 +26,21 @@ router.post('/register', (req, res, next) => {
         })
         .catch(next);
 });
+
+router.post('/login', checkInstLogin, (req, res, next) => {
+    let { password, instructor_name } = req.body;
+    console.log(req.instructor);
+
+    if(bcrypt.compareSync(password, req.instructor.password)) {
+        const token = instructorMakeToken(req.instructor);
+        res.json({
+            message: `Ready to make people sweat, ${instructor_name}`,
+            token
+        })
+    }
+})
+
+
 
 router.delete('/:instructor_id', (req, res, next) => {
     const { instructor_id } = req.params
