@@ -13,8 +13,10 @@ const getClass = cat => {
     return db('classes').where(`${cat}`, cat).first();
 };
 
+// TODO: add "class_type" to returning array after classes migration is updated to have it
+
 const addClass = async newClass => {
-    const [newClasss] = await db('classes')
+    const [addedClass] = await db('classes')
         .insert(newClass, [
             'class_id',
             'class_name',
@@ -25,16 +27,12 @@ const addClass = async newClass => {
             'current_clients',
             'max_class_size'
         ]);
-
-    return newClasss;
-
+    return addedClass;
 };
-
 
 const removeClass = class_id => {
     return db('classes').where('class_id', class_id).del();
 };
-
 
 
 module.exports = {

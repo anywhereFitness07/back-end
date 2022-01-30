@@ -12,7 +12,6 @@ router.get('/', (req, res, next) => {
         .catch(next)
 });
 
-
 router.post('/', (req, res, next) => {
     Classes.addClass(req.body)
         .then(newClass => {
@@ -21,17 +20,13 @@ router.post('/', (req, res, next) => {
         .catch(next);
 });
 
-
-
-
-
-
-
-
-
-
-
-
+router.delete('/:class_id', (req, res, next) => {
+    Classes.removeClass(req.params.class_id)
+        .then(() => {
+            res.json({message: 'Class Canceled.'})
+        })
+        .catch(next)
+});
 
 
 module.exports = router;
