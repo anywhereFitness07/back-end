@@ -27,7 +27,6 @@ const validateRole = (req, res, next) => {
             message: `Must be an instructor to add or delete a class.`
         })
     }
-
 }
 
 

@@ -1,7 +1,7 @@
 const bcrypt = require('bcryptjs');
 const { SEED_PASSWORD } = process.env;
 
-let password = ''
+let password = '';
 const hash = bcrypt.hashSync(SEED_PASSWORD, 8);
 
 exports.seed = function(knex) {
