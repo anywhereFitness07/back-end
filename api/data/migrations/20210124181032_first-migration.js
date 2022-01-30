@@ -4,7 +4,7 @@ exports.up = async (knex) => {
     .createTable('clients', (tbl) => {
       tbl.increments('client_id')
       tbl.string('client_name', 64).notNullable()
-      tbl.string('password', 24).notNullable()
+      tbl.string('password').notNullable()
       tbl.string('role', 8).defaultTo('client')
       tbl.timestamps(false, true)
     })
