@@ -13,7 +13,6 @@ const getClass = cat => {
     return db('classes').where(`${cat}`, cat).first();
 };
 
-// TODO: add "class_type" to returning array after classes migration is updated to have it
 
 const addClass = async newClass => {
     const [addedClass] = await db('classes')
@@ -25,7 +24,8 @@ const addClass = async newClass => {
             'intensity_level',
             'location',
             'current_clients',
-            'max_class_size'
+            'max_class_size',
+            'class_type'
         ]);
     return addedClass;
 };

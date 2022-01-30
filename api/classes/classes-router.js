@@ -14,6 +14,8 @@ router.get('/', (req, res, next) => {
         .catch(next)
 });
 
+
+
 router.post('/', (req, res, next) => {
     Classes.addClass(req.body)
         .then(newClass => {

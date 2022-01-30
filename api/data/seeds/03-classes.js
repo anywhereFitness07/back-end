@@ -1,6 +1,6 @@
 
 exports.seed = function(knex) {
-  return knex('classes').truncate()
+  return knex('classes').del()
     .then(function () {
       return knex('classes').insert([
         { class_name: 'Yoga', start_time: '5:00 a.m.', class_type: 'Cardio', duration: '45 mins', intensity_level: 2, location: 'Brentwood', max_class_size: 30, instructor_id: 1 },
