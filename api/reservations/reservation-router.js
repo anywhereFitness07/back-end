@@ -15,9 +15,10 @@ router.get('/:class_id', (req, res, next) => {
 
 router.post('/', checkClassSize, (req, res, next) => {
     Res.addRes(req.body)
-        .then(() => {
+        .then(newRes => {
             res.status(201).json({
-                message: `Your spot has been reserved!`
+                message: `Your spot has been reserved!`,
+                res: newRes
             })
         })
         .catch(next)
