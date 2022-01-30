@@ -24,12 +24,13 @@ exports.up = async (knex) => {
           tbl.string('location').notNullable()
           tbl.integer('current_clients').defaultTo(0)
           tbl.integer('max_class_size').notNullable()
-          tbl.integer('instructor_id').notNullable()
+          tbl.integer('instructor_id')
               .unsigned()
+              .notNullable()
               .references('instructor_id')
               .inTable('instructors')
-              .onUpdate('RESTRICTED')
-              .onDelete('RESTRICTED')
+              .onUpdate('CASCADE')
+              .onDelete('CASCADE')
       })
 }
 
