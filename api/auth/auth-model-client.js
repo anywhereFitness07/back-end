@@ -16,10 +16,13 @@ const insertClient = async user => {
 };
 
 const findClient = client => {
-    return  db('clients').where('client_name', client.client_name)
+    return  db('clients').where('client_name', client.client_name);
 };
 
+const removeClient = client_id => {
+    return db('clients').where('client_id', client_id).del();
 
+};
 
 
 
@@ -30,6 +33,7 @@ module.exports = {
     insertClient,
     getAllInstructors,
     findClient,
+    removeClient,
 };
 
 

@@ -22,9 +22,20 @@ router.post('/register', (req, res, next) => {
         .then(newInst => {
             res.status(201).json(newInst)
         })
-        .catch(next)
-})
+        .catch(next);
+});
 
+router.delete('/:instructor_id', (req, res, next) => {
+    const { instructor_id } = req.params
+
+    Instructors.removeInstructor(instructor_id)
+        .then(() => {
+            res.json({
+                message: `Account was closed. Good bye`
+            })
+        })
+        .catch(next);
+});
 
 
 

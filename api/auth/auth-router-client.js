@@ -51,6 +51,18 @@ router.get('/:client_name',checkClientLogin, (req, res, next) => {
         .catch(next)
 });
 
+router.delete('/:client_id', (req, res, next) => {
+    let { client_id } = req.params;
+
+    Clients.removeClient(client_id)
+        .then(() => {
+            res.json({
+                message: `Account deleted. Goodbye.`
+            })
+        })
+        .catch(next)
+})
+
 
 
 module.exports = router;
