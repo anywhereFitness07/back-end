@@ -1,3 +1,8 @@
+// TODO: remove notNullable from classes: current_clients and set to default to 0
+// TODO: remove notNullable from clients table and set to default to "client"
+// TODO: remove notNullable from instructors table and set to default to "instructor"
+// TODO: add an instructor_id column to classes table to keep track of who is teaching it
+
 exports.up = async (knex) => {
   await knex.schema
     .createTable('clients', (users) => {
