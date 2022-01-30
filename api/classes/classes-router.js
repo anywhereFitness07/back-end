@@ -25,7 +25,7 @@ router.delete('/:class_id', (req, res, next) => {
         .then(() => {
             res.json({message: 'Class Canceled.'})
         })
-        .catch(next)
+        .catch(next);
 });
 
 

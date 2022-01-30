@@ -1,32 +1,35 @@
-// TODO: remove notNullable from classes: current_clients and set to default to 0
-// TODO: remove notNullable from clients table and set to default to "client"
-// TODO: remove notNullable from instructors table and set to default to "instructor"
-// TODO: add an instructor_id column to classes table to keep track of who is teaching it
 
 exports.up = async (knex) => {
   await knex.schema
-    .createTable('clients', (users) => {
-      users.increments('client_id')
-      users.string('client_name', 200).notNullable()
-      users.string('password', 200).notNullable()
-      users.string('role', 200).notNullable()
-      users.timestamps(false, true)
+    .createTable('clients', (tbl) => {
+      tbl.increments('client_id')
+      tbl.string('client_name', 64).notNullable()
+      tbl.string('password', 24).notNullable()
+      tbl.string('role', 8).defaultTo('client')
+      tbl.timestamps(false, true)
     })
     .createTable('instructors', tbl => {
         tbl.increments('instructor_id')
         tbl.string('instructor_name').notNullable()
-        tbl.string('role').notNullable()
+        tbl.string('role', 12).defaultTo('instructor')
         tbl.string('password').notNullable()
     })
       .createTable('classes', tbl => {
           tbl.increments('class_id')
           tbl.string('class_name').notNullable()
           tbl.string('start_time').notNullable()
-          tbl.integer('duration').notNullable()
+          tbl.string('class_type').notNullable()
+          tbl.string('duration').notNullable()
           tbl.integer('intensity_level').notNullable()
           tbl.string('location').notNullable()
-          tbl.integer('current_clients').notNullable()
+          tbl.integer('current_clients').defaultTo(0)
           tbl.integer('max_class_size').notNullable()
+          tbl.integer('instructor_id').notNullable()
+              .unsigned()
+              .references('instructor_id')
+              .inTable('instructors')
+              .onUpdate('RESTRICTED')
+              .onDelete('RESTRICTED')
       })
 }
 
