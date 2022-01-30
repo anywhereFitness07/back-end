@@ -10,9 +10,9 @@ const getAllInstructors = () => {
 
 };
 
-const insertUser = async user => {
-    const [newUser] = await db('clients').insert(user, ['client_id','client_name', 'role']);
-    return newUser;
+const insertClient = async user => {
+    const [newClient] = await db('clients').insert(user, ['client_id','client_name', 'role']);
+    return newClient;
 };
 
 const findClient = client => {
@@ -25,10 +25,9 @@ const findClient = client => {
 
 
 
-
 module.exports = {
     getAllClients,
-    insertUser,
+    insertClient,
     getAllInstructors,
     findClient,
 };

@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const Clients = require('./auth-model');
+const Clients = require('./auth-model-client');
 const bcrypt = require('bcryptjs');
 const { checkClientLogin } = require('./auth-middleware');
 const { clientMakeToken } = require('./makeToken');
@@ -14,11 +14,11 @@ router.get('/', (req, res, next) => {
         .catch(next)
 });
 
-router.post('/register/client', (req, res, next) => {
+router.post('/register', (req, res, next) => {
     let user = req.body;
     user.password = bcrypt.hashSync(user.password, 8);
 
-    Clients.insertUser(user)
+    Clients.insertClient(user)
         .then(newUser => {
             console.log(newUser)
             res.status(201).json(newUser)
@@ -26,7 +26,7 @@ router.post('/register/client', (req, res, next) => {
         .catch(next)
 });
 
-router.post('/login/client', checkClientLogin,  (req, res, next) => {
+router.post('/login', checkClientLogin,  (req, res, next) => {
     let {  password } = req.body;
 
     if(bcrypt.compareSync(password, req.client.password)) {
