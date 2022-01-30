@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const { JWT_SECRET } = require('../configs');
 
 
-module.exports = (req, res, next) => {
+const restricted = (req, res, next) => {
     const token = req.headers.authorization;
     if(!token) {
         next({status: 403, message: `token required`})
@@ -18,11 +18,25 @@ module.exports = (req, res, next) => {
 };
 
 
+const validateRole = (req, res, next) => {
+    if(req.decoded.role === 'instructor') {
+        next()
+    } else {
+        next({
+            status: 401,
+            message: `Must be an instructor to add or delete a class.`
+        })
+    }
+
+}
 
 
 
 
-
+module.exports = {
+    restricted,
+    validateRole,
+}
 
 
 

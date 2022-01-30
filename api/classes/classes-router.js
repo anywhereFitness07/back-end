@@ -3,6 +3,7 @@ const Classes = require('./classes-model');
 
 
 // TODO: Add conditional check for token role instructor here or middleware before adding a class
+// TODO: Add restricted middleware to to the all the routes
 
 router.get('/', (req, res, next) => {
     Classes.getAllClasses()
