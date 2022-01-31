@@ -94,6 +94,8 @@ The following demo explains how to set up a project using PostgreSQL and Heroku.
 
 **END POINTS-**
 
+**Base URL**  https://anywhere-fitness-07-backend.herokuapp.com/
+
 **CLIENTS:**
 
 POST Register new client: /api/auth/clients/register  Requires sending client_name and password
