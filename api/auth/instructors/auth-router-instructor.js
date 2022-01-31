@@ -38,8 +38,7 @@ router.post('/login', checkInstLogin, (req, res, next) => {
             token
         })
     }
-})
-
+});
 
 
 router.delete('/:instructor_id', (req, res, next) => {

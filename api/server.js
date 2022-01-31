@@ -6,7 +6,6 @@ const instRouter = require('./auth/instructors/auth-router-instructor');
 const classesRouter = require('./classes/classes-router');
 const resRouter = require('./reservations/reservation-router')
 
-
 const server = express();
 server.use(express.json());
 server.use(helmet());

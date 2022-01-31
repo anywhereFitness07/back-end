@@ -7,6 +7,7 @@ const getAllInstructors = () => {
 
 const insertInstructor = async instructor => {
     const [newInstructor] = await db('instructors').insert(instructor, ['instructor_id','instructor_name', 'role']);
+    console.log(newInstructor);
     return newInstructor;
 };
 
