@@ -1,4 +1,5 @@
 const db = require('../../data/db-config');
+const e = require("express");
 
 const checkInstLogin = async (req, res, next) => {
     const instructor_name = req.body;
@@ -8,17 +9,45 @@ const checkInstLogin = async (req, res, next) => {
             req.instructor = instructor;
             next();
         } else {
-            next({status: 404, message: `Invalid Credentials`})
+            next({status: 404, message: `Invalid Credentials`});
         }
     }
     catch (err) {
-        next(err)
+        next(err);
     }
 };
 
+const checkInstBody = (req, res, next) => {
+    const { instructor_name, password } = req.body;
+    if(!instructor_name || !password) {
+        next({status: 401,
+            message: `Instructor name and password Required`
+        });
+    } else{ next() }
+};
+
+const checkInstExist = async (req, res, next) => {
+    // const instructor_id = req.params.instructor_id; { instructor_id: req.params.instructor_id }
+    const instructor = await db('instructors')
+        .where('instructor_id', req.params.instructor_id)
+        .first()
+
+    if(instructor) {
+        next()
+    } else {
+        next({
+            status: 404,
+            message: `Instructor not found`
+        })
+    }
+};
+
+
+
 module.exports = {
     checkInstLogin,
-
+    checkInstBody,
+    checkInstExist,
 };
 
 
