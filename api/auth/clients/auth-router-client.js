@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const Clients = require('./auth-model-client');
 const bcrypt = require('bcryptjs');
-const { checkClientLogin, checkBody } = require('./auth-middleware-client');
+const { checkClientNameExists, checkBody, checkClientById, } = require('./auth-middleware-client');
 const { clientMakeToken } = require('../make-token/clientMakeToken');
 
 
@@ -25,7 +25,7 @@ router.post('/register', checkBody, (req, res, next) => {
         .catch(next);
 });
 
-router.post('/login', checkClientLogin,  (req, res, next) => {
+router.post('/login',   checkClientNameExists,(req, res, next) => {
     let {  password } = req.body;
 
     if(bcrypt.compareSync(password, req.client.password)) {
@@ -39,7 +39,7 @@ router.post('/login', checkClientLogin,  (req, res, next) => {
     }
 });
 
-router.get('/:client_name',checkClientLogin, (req, res, next) => {
+router.get('/:client_name',checkClientNameExists, (req, res, next) => {
     let {client_name} = req.params
     console.log(client_name)
     Clients.findClient({client_name})
@@ -50,7 +50,7 @@ router.get('/:client_name',checkClientLogin, (req, res, next) => {
         .catch(next);
 });
 
-router.delete('/:client_id', (req, res, next) => {
+router.delete('/:client_id', checkClientById, (req, res, next) => {
     let { client_id } = req.params;
 
     Clients.removeClient(client_id)

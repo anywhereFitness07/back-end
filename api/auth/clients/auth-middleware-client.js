@@ -1,10 +1,10 @@
 const db = require('../../data/db-config');
 
 
-const checkClientLogin = async (req, res, next) => {
-    const {client_name} = req.body;
+const checkClientNameExists= async (req, res, next) => {
+    const client_name = req.body.client_name;
     try {
-        const client = await db('clients').where({client_name}).first();
+        const client = await db('clients').where("client_name", client_name).first();
         if(client) {
             req.client = client;
             next()
@@ -17,6 +17,20 @@ const checkClientLogin = async (req, res, next) => {
     }
     catch (err) {
         next(err)
+    }
+};
+
+const checkClientById = async (req, res, next) => {
+    const clientId = await db('clients')
+        .where('client_id', req.params.client_id)
+        .first();
+    if(clientId) {
+        next();
+    } else {
+        next({
+            status:404,
+            message: `Client not found`
+        });
     }
 };
 
@@ -34,8 +48,9 @@ const checkBody = (req, res, next) => {
 };
 
 module.exports = {
-    checkClientLogin,
+    checkClientNameExists,
     checkBody,
+    checkClientById,
 };
 
 
