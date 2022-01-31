@@ -14,20 +14,28 @@ const checkClientLogin = async (req, res, next) => {
                 message: `Client not found`
             })
         }
-
     }
     catch (err) {
         next(err)
     }
 };
 
+const checkBody = (req, res, next) => {
+    const { client_name, password } = req.body
 
-
-
-
+    if(!client_name || !password) {
+        next({
+            status: 401,
+            message: `Client_name and password are required`
+        })
+    } else {
+        next()
+    }
+};
 
 module.exports = {
     checkClientLogin,
+    checkBody,
 };
 
 

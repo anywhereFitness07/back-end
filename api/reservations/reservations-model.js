@@ -6,7 +6,7 @@ const getClasses = () => {
 };
 
 const getResByClassId = class_id => {
-    return db('classes')
+    return db('client-reservations')
         .where('class_id', class_id)
 };
 

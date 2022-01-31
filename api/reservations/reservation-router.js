@@ -13,13 +13,6 @@ router.get('/:class_id', (req, res, next) => {
         .catch(next);
 });
 
-router.get('/', (req, res, next) => {
-    Res.getClasses()
-        .then(classes => {
-            res.json(classes)
-        })
-        .catch(next)
-});
 
 router.post('/', checkClassSize, (req, res, next) => {
     Res.addRes(req.body)

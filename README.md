@@ -90,3 +90,87 @@ Install [Postgres](https://www.postgresql.org/download/) on your computer, takin
 The following demo explains how to set up a project using PostgreSQL and Heroku.
 
 [![Setting up PostgreSQL for Build Week](https://tk-assets.lambdaschool.com/e43c6d1e-5ae8-4142-937b-b865d71925fb_unit-4-build-week-project-scaffolding.png)](https://bloomtech-1.wistia.com/medias/2625bl7sei)
+
+
+**END POINTS-**
+
+**CLIENTS:**
+
+POST Register new client: /api/auth/clients/register  Requires sending client_name and password
+
+POST Client login: /api/auth/clients/login  Requires sending client_name and password
+  
+DELETE Remove client : /api/auth/clients/:client_id  Include client_id in URL parameters
+
+**INSTRUCTORS:**
+
+POST - Register new instructor: /api/auth/instructors/register  Requires sending instructor_name and password
+
+POST - Instructors login: /api/auth/instructors/login  Requires sending instructor_name and password
+
+DELETE - Remove instructor : /api/auth/instructors/:instructor_id  Include instructor_id in URL parameters
+
+**CLASSES:**
+
+GET - Get all classes: /api/classes
+
+GET - Get class by class_id: /api/classes/:class_id  Include class_id in URL parameters
+
+POST - Add new class : /api/classes Send all field values except class_id and current_clients
+
+DELETE - Remove a class: /api/classes/:class_id Include class_id in URL parameters
+
+**RESERVATIONS**
+
+GET - Get reservations by class_id: /api/reservations/:class_id  Include class_id in URL parameters
+
+POST - Add new reservation: /api/reservations  Req body must  include class_id and client_id
+
+PUT - Remove a reservation: /api/reservations Req body must include cr_id and class_id
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

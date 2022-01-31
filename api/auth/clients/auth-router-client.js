@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const Clients = require('./auth-model-client');
 const bcrypt = require('bcryptjs');
-const { checkClientLogin } = require('./auth-middleware-client');
+const { checkClientLogin, checkBody } = require('./auth-middleware-client');
 const { clientMakeToken } = require('../make-token/clientMakeToken');
 
 
@@ -13,7 +13,7 @@ router.get('/', (req, res, next) => {
         .catch(next)
 });
 
-router.post('/register', (req, res, next) => {
+router.post('/register', checkBody, (req, res, next) => {
     let user = req.body;
     user.password = bcrypt.hashSync(user.password, 8);
 
@@ -22,7 +22,7 @@ router.post('/register', (req, res, next) => {
             console.log(newUser)
             res.status(201).json(newUser)
         })
-        .catch(next)
+        .catch(next);
 });
 
 router.post('/login', checkClientLogin,  (req, res, next) => {
@@ -47,7 +47,7 @@ router.get('/:client_name',checkClientLogin, (req, res, next) => {
             console.log(client)
             res.json(client)
         })
-        .catch(next)
+        .catch(next);
 });
 
 router.delete('/:client_id', (req, res, next) => {
@@ -59,8 +59,8 @@ router.delete('/:client_id', (req, res, next) => {
                 message: `Account deleted. Goodbye.`
             })
         })
-        .catch(next)
-})
+        .catch(next);
+});
 
 
 
