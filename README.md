@@ -123,6 +123,7 @@ POST - Add new class : /api/classes Send all field values except class_id and cu
 DELETE - Remove a class: /api/classes/:class_id Include class_id in URL parameters
 
 **RESERVATIONS**
+GET - Get a list of all classes /api/reservations
 
 GET - Get reservations by class_id: /api/reservations/:class_id  Include class_id in URL parameters
 

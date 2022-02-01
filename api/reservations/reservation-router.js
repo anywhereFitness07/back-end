@@ -35,6 +35,15 @@ router.put('/', (req,res, next) => {
 
 })
 
+router.get('/', (req, res, next) => {
+    Res.punchCard()
+        .then(card => {
+            res.json(card)
+        })
+        .catch(next)
+
+
+});
 
 
 

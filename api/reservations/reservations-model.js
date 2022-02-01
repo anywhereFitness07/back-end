@@ -6,12 +6,12 @@ const getClasses = () => {
 };
 
 const getResByClassId = class_id => {
-    return db('client-reservations')
+    return db('client_reservations')
         .where('class_id', class_id)
 };
 
 const addRes = async client => {
-    await db('client-reservations').insert(client);
+    await db('client_reservations').insert(client);
      await  db('classes')
         .where('class_id', client.class_id)
         .increment('current_clients', 1)
@@ -20,7 +20,7 @@ const addRes = async client => {
 };
 
 const cancelRes = async reservation => {
-    await db('client-reservations').where('cr_id', reservation.cr_id).del();
+    await db('client_reservations').where('cr_id', reservation.cr_id).del();
     await db('classes')
         .where('class_id', reservation.class_id)
         .decrement('current_clients', 1)
@@ -29,6 +29,15 @@ const cancelRes = async reservation => {
 
 }
 
+const punchCard = () => {
+    return db('client_reservations')
+        .join('client_punch_card', 'client_punch_card.cr_id', 'client_reservations.cr_id')
+
+
+    // return db('client_punch_card')
+    //     .select('cr_id')
+
+}
 
 
 module.exports = {
@@ -36,6 +45,7 @@ module.exports = {
     addRes,
     getClasses,
     cancelRes,
+    punchCard,
 };
 
 
