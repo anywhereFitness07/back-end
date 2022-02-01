@@ -1,5 +1,4 @@
 const db = require('../../data/db-config');
-const e = require("express");
 
 const checkInstLogin = async (req, res, next) => {
     const instructor_name = req.body;

@@ -44,7 +44,6 @@ router.get('/:client_name',checkClientNameExists, (req, res, next) => {
     console.log(client_name)
     Clients.findClient({client_name})
         .then(client => {
-            console.log(client)
             res.json(client)
         })
         .catch(next);

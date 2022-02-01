@@ -19,23 +19,22 @@ const addRes = async client => {
     return db('classes').where('class_id', client.class_id).first();
 };
 
-const cancelRes = async reservation => {
-    await db('client_reservations').where('cr_id', reservation.cr_id).del();
-    await db('classes')
-        .where('class_id', reservation.class_id)
-        .decrement('current_clients', 1)
+const cancelRes = reservation => {
+    return  db('client_reservations').where('cr_id', reservation).del();
+    // await db('classes')
+    //     .where('class_id', reservation)
+    //     .decrement('current_clients', 1)
+    //
+    // return {message: `Res canceled`}
 
-    return db('classes').where('class_id', reservation.class_id).first();
-
-}
+};
 
 const punchCard = () => {
-    return db('client_reservations')
-        .join('client_punch_card', 'client_punch_card.cr_id', 'client_reservations.cr_id')
+    return db('client_punch_card AS cpc')
+        .join('client_reservations AS cr', 'cr.cr_id', 'cpc.cr_id')
+        .join('classes AS cs', 'cs.class_id', 'cr.class_id')
+        .join('clients AS cl', 'cl.client_id', 'cr.client_id')
 
-
-    // return db('client_punch_card')
-    //     .select('cr_id')
 
 }
 

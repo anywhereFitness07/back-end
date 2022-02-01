@@ -39,7 +39,6 @@ router.post('/login', checkInstBody,  checkInstLogin, (req, res, next) => {
 
 router.delete('/:instructor_id', checkInstExist,(req, res, next) => {
     const { instructor_id } = req.params
-
     Instructors.removeInstructor(instructor_id)
         .then(() => {
             res.json({

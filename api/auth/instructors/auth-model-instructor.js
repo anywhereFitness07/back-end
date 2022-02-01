@@ -12,7 +12,9 @@ const insertInstructor = async instructor => {
 };
 
 const removeInstructor = instructor_id => {
-    return db('instructors').where('instructor_id', instructor_id).del();
+    return db('instructors')
+        .where('instructor_id', instructor_id)
+        .del();
 };
 
 module.exports = {

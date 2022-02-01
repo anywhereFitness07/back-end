@@ -24,10 +24,6 @@ const removeClient = client_id => {
 
 };
 
-
-
-
-
 module.exports = {
     getAllClients,
     insertClient,

@@ -58,9 +58,22 @@ exports.up = async (knex) => {
               .inTable('client_reservations')
               .onUpdate('CASCADE')
               .onDelete('CASCADE')
+          tbl.integer('client_id')
+              .unsigned()
+              .notNullable()
+              .references('client_id')
+              .inTable('clients')
+              .onUpdate('CASCADE')
+              .onDelete('CASCADE')
+          tbl.integer('class_id')
+              .unsigned()
+              .notNullable()
+              .references('class_id')
+              .inTable('classes')
+              .onUpdate('CASCADE')
+              .onDelete('CASCADE')
           tbl.integer('current_class_num').defaultTo(0)
           tbl.integer('max_class_num').defaultTo(6)
-
       })
 }
 
