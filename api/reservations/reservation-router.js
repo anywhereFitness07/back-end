@@ -39,8 +39,6 @@ router.post('/', checkClassSize, checkPunchCard, (req, res, next) => {
                 await db('client_punch_card')
                     .where('class_id', resv.class_id)
                     .increment('current_class_num', 1)
-
-
         })
         .catch(next)
 });
