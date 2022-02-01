@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const Classes = require('./classes-model');
+const { restricted, validateRole } = require('./classes-middleware')
 
 
 // TODO: Add conditional check for token role instructor here or middleware before adding a class
@@ -16,7 +17,7 @@ router.get('/', (req, res, next) => {
 
 
 
-router.post('/', (req, res, next) => {
+router.post('/', restricted, validateRole,(req, res, next) => {
     Classes.addClass(req.body)
         .then(newClass => {
             res.status(201).json(newClass)

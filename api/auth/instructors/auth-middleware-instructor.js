@@ -1,7 +1,7 @@
 const db = require('../../data/db-config');
 
 const checkInstLogin = async (req, res, next) => {
-    const instructor_name = req.body;
+    const instructor_name = req.body.instructor_name;
     try {
         const instructor = await db('instructors').where({instructor_name}).first();
         if(instructor) {

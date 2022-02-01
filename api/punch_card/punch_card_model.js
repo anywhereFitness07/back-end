@@ -8,20 +8,15 @@ const getAll = () => {
 const addCard = async card => {
     const cards = await db('client_punch_card').insert(card)
 
-
     return db('client_punch_card')
 
-}
-
-console.log('add card: ', addCard)
+};
 
 const deleteCard = pc_id => {
-    return db('client_punch_card').where('pc_id', pc_id).del()
-
-}
-
-
-
+    return db('client_punch_card')
+        .where('pc_id', pc_id)
+        .del()
+};
 
 module.exports = {
     getAll,
