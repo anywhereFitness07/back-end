@@ -125,6 +125,8 @@ DELETE - Remove a class: /api/classes/:class_id Include class_id in URL paramete
 **RESERVATIONS**
 GET - Get a list of all classes /api/reservations
 
+GET - Get reserved class by client_id  /api/reservations/clients/:client_id
+
 GET - Get reservations by class_id: /api/reservations/:class_id  Include class_id in URL parameters
 
 POST - Add new reservation: /api/reservations  Req body must  include class_id and client_id
