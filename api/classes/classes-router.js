@@ -33,6 +33,16 @@ router.delete('/:class_id', (req, res, next) => {
         .catch(next);
 });
 
+router.get('/:client_id', (req, res, next) => {
+    Classes.getClassById(req.params.client_id)
+        .then(ress => {
+            res.json(ress)
+        })
+        .catch(err => {
+            console.error(err);
+        })
+})
+
 
 module.exports = router;
 

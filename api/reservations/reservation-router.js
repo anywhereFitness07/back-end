@@ -23,23 +23,23 @@ router.post('/', checkClassSize, checkPunchCard, (req, res, next) => {
                 res: {...newRes, client_id}
             })
         })
-        .then( async () => {
-            const resv = res.reservation;
-            const client_id = await db('client_punch_card AS cpc')
-                .join('client_reservations AS cr', 'cr.cr_id', 'cpc.cr_id')
-                .select('cpc.client_id')
-                .where('cpc.client_id', resv.client_id)
-                .first()
-            const class_id = await db('client_punch_card AS cpc')
-                .join('classes AS cl', 'cpc.class_id', 'cl.class_id')
-                .select('cpc.class_id')
-                .where('cpc.class_id', resv.class_id)
-                .first()
-
-                await db('client_punch_card')
-                    .where('class_id', resv.class_id)
-                    .increment('current_class_num', 1)
-        })
+        // .then( async () => {
+        //     const resv = res.reservation;
+        //     const client_id = await db('client_punch_card AS cpc')
+        //         .join('client_reservations AS cr', 'cr.cr_id', 'cpc.cr_id')
+        //         .select('cpc.client_id')
+        //         .where('cpc.client_id', resv.client_id)
+        //         .first()
+        //     const class_id = await db('client_punch_card AS cpc')
+        //         .join('classes AS cl', 'cpc.class_id', 'cl.class_id')
+        //         .select('cpc.class_id')
+        //         .where('cpc.class_id', resv.class_id)
+        //         .first()
+        //
+        //         await db('client_punch_card')
+        //             .where('class_id', resv.class_id)
+        //             .increment('current_class_num', 1)
+        // })
         .catch(next)
 });
 
@@ -61,6 +61,16 @@ router.get('/', (req, res, next) => {
         .catch(next)
 });
 
+router.get('/clients/:client_id', (req, res, next) => {
+
+    Res.getResByClientId(req.params.client_id)
+        .then(resv => {
+            res.json(resv);
+        })
+        .catch(err => {
+            console.error(err);
+        })
+});
 
 module.exports = router;
 

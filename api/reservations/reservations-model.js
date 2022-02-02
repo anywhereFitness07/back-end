@@ -35,7 +35,12 @@ const punchCard = () => {
         .join('classes AS cs', 'cs.class_id', 'cr.class_id')
         .join('clients AS cl', 'cl.client_id', 'cr.client_id')
 
+}
 
+const getResByClientId = async id => {
+    const client = await db('client_reservations').where('client_id', id).first();
+    const classes = await db('classes').where('class_id', client.class_id).first();
+    return classes
 }
 
 
@@ -45,6 +50,7 @@ module.exports = {
     getClasses,
     cancelRes,
     punchCard,
+    getResByClientId,
 };
 
 

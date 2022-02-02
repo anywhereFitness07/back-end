@@ -13,6 +13,10 @@ const getClass = cat => {
     return db('classes').where(`${cat}`, cat).first();
 };
 
+const getResByClientId = client_id => {
+    return db('client-reservations')
+
+}
 
 const addClass = async newClass => {
     const [addedClass] = await db('classes')
@@ -41,7 +45,7 @@ module.exports = {
     getClass,
     addClass,
     removeClass,
-
+    getResByClientId,
 };
 
 
