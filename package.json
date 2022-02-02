@@ -12,7 +12,8 @@
     "database:prod": "heroku pg:psql -a anywhere-fitness-07-backend",
     "seed:prod": "heroku run knex seed:run -a anywhere-fitness-07-backend",
     "test": "cross-env NODE_ENV=testing jest --verbose --runInBand",
-    "deploy": "git push heroku main"
+    "deploy": "git push heroku main",
+    "testes": "nothing"
   },
   "engines": {
     "node": "16.13.2"
