@@ -120,6 +120,8 @@ GET - Get class by class_id: /api/classes/:class_id  Include class_id in URL par
 
 POST - Add new class : /api/classes Send all field values except class_id and current_clients
 
+PUT - Update an existing class:  /api/classes Send all field values whether they are being updated or not
+
 DELETE - Remove a class: /api/classes/:class_id Include class_id in URL parameters
 
 **RESERVATIONS**
