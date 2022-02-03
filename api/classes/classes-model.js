@@ -6,7 +6,7 @@ const getAllClasses = () => {
 };
 
 const getClassById = class_id => {
-    return db('classes').where('class_id', class_id);
+    return db('classes').where('class_id', class_id).first();
 };
 
 const getClass = cat => {

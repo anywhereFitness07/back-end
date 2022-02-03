@@ -11,6 +11,16 @@ router.get('/', (req, res, next) => {
         .catch(next);
 });
 
+router.get('/class/:class_id', (req, res, next) => {
+    const { class_id } = req.body;
+    Classes.getClassById(class_id)
+        .then(resp => {
+            res.json(resp);
+        })
+        .catch(next);
+});
+
+
 router.post('/', restricted, validateRole,(req, res, next) => {
     Classes.addClass(req.body)
         .then(newClass => {
@@ -35,7 +45,7 @@ router.get('/:client_id', (req, res, next) => {
         .catch(next);
 });
 
-router.put('/', (req, res, next) => {
+router.put('/update', (req, res, next) => {
     Classes.updateClass(req.body)
         .then(update => {
             res.json(update);
