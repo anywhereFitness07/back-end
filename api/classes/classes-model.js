@@ -1,5 +1,4 @@
 const db = require('../data/db-config');
-const knex = require("knex");
 
 
 const getAllClasses = () => {
@@ -13,11 +12,6 @@ const getClassById = class_id => {
 const getClass = cat => {
     return db('classes').where(`${cat}`, cat).first();
 };
-
-const getResByClientId = client_id => {
-    return db('client-reservations')
-
-}
 
 const addClass = async newClass => {
     const [addedClass] = await db('classes')
@@ -40,12 +34,9 @@ const removeClass = class_id => {
 };
 
 const updateClass = updated => {
-    const { class_id } = updated
-
+    const { class_id } = updated;
     return db('classes').where('class_id', class_id).update(updated);
-
-}
-
+};
 
 module.exports = {
     getAllClasses,
@@ -53,9 +44,7 @@ module.exports = {
     getClass,
     addClass,
     removeClass,
-    getResByClientId,
     updateClass,
-
 };
 
 

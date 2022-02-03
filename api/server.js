@@ -17,7 +17,6 @@ server.use('/api/classes', classesRouter);
 server.use('/api/reservations', resRouter);
 server.use('/api/punch-card', pcRouter);
 
-
 server.get('/', (req, res, next) => {
   res.json({api: 'up'});
 });
@@ -33,5 +32,4 @@ server.use((err, req, res, next) => {
         stack: err.stack
       });
 });
-
 module.exports = server;

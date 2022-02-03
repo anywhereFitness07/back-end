@@ -11,9 +11,7 @@ const instructorMakeToken = user => {
         expiresIn: "1d",
     };
     return jwt.sign(payload, JWT_SECRET, options);
-
 };
-
 
 module.exports = instructorMakeToken;
 

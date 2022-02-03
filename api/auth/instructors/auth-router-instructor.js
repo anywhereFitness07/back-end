@@ -32,18 +32,17 @@ router.post('/login', checkInstBody,  checkInstLogin, (req, res, next) => {
         res.json({
             message: `Ready to make people sweat, ${instructor_name}`,
             token
-        })
+        });
     }
 });
 
-
 router.delete('/:instructor_id', checkInstExist,(req, res, next) => {
-    const { instructor_id } = req.params
+    const { instructor_id } = req.params;
     Instructors.removeInstructor(instructor_id)
         .then(() => {
             res.json({
                 message: `Account was closed. Good bye`
-            })
+            });
         })
         .catch(next);
 });

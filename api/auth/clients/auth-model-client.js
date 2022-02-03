@@ -7,7 +7,6 @@ const getAllClients = () => {
 
 const getAllInstructors = () => {
     return db('instructors');
-
 };
 
 const insertClient = async user => {

@@ -26,22 +26,19 @@ const checkInstBody = (req, res, next) => {
 };
 
 const checkInstExist = async (req, res, next) => {
-    // const instructor_id = req.params.instructor_id; { instructor_id: req.params.instructor_id }
     const instructor = await db('instructors')
         .where('instructor_id', req.params.instructor_id)
-        .first()
+        .first();
 
     if(instructor) {
-        next()
+        next();
     } else {
         next({
             status: 404,
             message: `Instructor not found`
-        })
+        });
     }
 };
-
-
 
 module.exports = {
     checkInstLogin,

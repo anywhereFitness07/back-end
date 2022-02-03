@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const Res = require('./reservations-model');
-const { checkClassSize, checkPunchCard } = require('./reservations-middleware');
+const { checkClassSize } = require('./reservations-middleware');
 const db = require('../data/db-config');
 
 router.get('/:class_id', (req, res, next) => {
@@ -13,16 +13,17 @@ router.get('/:class_id', (req, res, next) => {
         .catch(next);
 });
 
-router.post('/', checkClassSize, checkPunchCard, (req, res, next) => {
+router.post('/', checkClassSize, (req, res, next) => {
     Res.addRes(req.body)
         .then(newRes => {
             const client_id = req.body.client_id;
-            res.reservation = {...newRes, client_id}
+            res.reservation = {...newRes, client_id};
             res.status(201).json({
                 message: `Your spot has been reserved!`,
                 res: {...newRes, client_id}
             })
         })
+        .catch(next);
         // .then( async () => {
         //     const resv = res.reservation;
         //     const client_id = await db('client_punch_card AS cpc')
@@ -40,36 +41,33 @@ router.post('/', checkClassSize, checkPunchCard, (req, res, next) => {
         //             .where('class_id', resv.class_id)
         //             .increment('current_class_num', 1)
         // })
-        .catch(next)
+
 });
 
 router.put('/:id', (req,res, next) => {
     Res.cancelRes(req.params.id)
         .then(updatedClass => {
             res.json(updatedClass);
-
         })
-        .catch(next)
-
+        .catch(next);
 });
 
 router.get('/', (req, res, next) => {
     Res.punchCard()
         .then(card => {
-            res.json(card)
+            res.json(card);
         })
-        .catch(next)
+        .catch(next);
 });
 
 router.get('/clients/:client_id', (req, res, next) => {
-
     Res.getResByClientId(req.params.client_id)
         .then(resv => {
             res.json(resv);
         })
         .catch(err => {
             console.error(err);
-        })
+        });
 });
 
 module.exports = router;

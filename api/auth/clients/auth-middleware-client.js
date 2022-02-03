@@ -7,16 +7,16 @@ const checkClientNameExists= async (req, res, next) => {
         const client = await db('clients').where("client_name", client_name).first();
         if(client) {
             req.client = client;
-            next()
+            next();
         } else {
             next({
                 status: 404,
                 message: `Client not found`
-            })
+            });
         }
     }
     catch (err) {
-        next(err)
+        next(err);
     }
 };
 
@@ -35,15 +35,15 @@ const checkClientById = async (req, res, next) => {
 };
 
 const checkBody = (req, res, next) => {
-    const { client_name, password } = req.body
+    const { client_name, password } = req.body;
 
     if(!client_name || !password) {
         next({
             status: 401,
             message: `Client_name and password are required`
-        })
+        });
     } else {
-        next()
+        next();
     }
 };
 
