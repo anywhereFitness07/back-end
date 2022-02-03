@@ -41,6 +41,18 @@ router.get('/:client_id', (req, res, next) => {
         .catch(err => {
             console.error(err);
         })
+});
+
+router.put('/', (req, res, next) => {
+
+    Classes.updateClass(req.body)
+        .then(update => {
+            res.json(update)
+        })
+        .catch(err => {
+            console.error(err)
+        })
+
 })
 
 

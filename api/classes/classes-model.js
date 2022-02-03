@@ -1,4 +1,5 @@
 const db = require('../data/db-config');
+const knex = require("knex");
 
 
 const getAllClasses = () => {
@@ -38,6 +39,13 @@ const removeClass = class_id => {
     return db('classes').where('class_id', class_id).del();
 };
 
+const updateClass = updated => {
+    const { class_id } = updated
+
+    return db('classes').where('class_id', class_id).update(updated);
+
+}
+
 
 module.exports = {
     getAllClasses,
@@ -46,6 +54,8 @@ module.exports = {
     addClass,
     removeClass,
     getResByClientId,
+    updateClass,
+
 };
 
 
